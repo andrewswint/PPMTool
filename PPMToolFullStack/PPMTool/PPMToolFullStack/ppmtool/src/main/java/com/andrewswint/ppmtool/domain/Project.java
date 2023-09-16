@@ -2,6 +2,7 @@ package com.andrewswint.ppmtool.domain;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Project {
@@ -18,7 +20,11 @@ public class Project {
 	private Long id;
 	@NotBlank(message = "Project name required")
 	private String projectName;
+	@NotBlank(message = "Project identifier required")
+	@Size(min = 4, max = 5, message = "Please use 4-5 chars")
+	@Column(unique = true, updatable = false)
 	private String provectIdentifier;
+	@NotBlank(message = "Project description required")
 	private String description;
 	private Date start_date;
 	private Date end_date;
